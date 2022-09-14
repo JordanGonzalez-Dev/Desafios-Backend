@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar</title>
+
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="./styles.css" />
+    
+</head>
+
+<body>
+    <nav>
+        <div class="nav-center">
+
+            <!-- Nav Header -->
+            <div class="nav-header">
+                <img src="./logo.svg" class="logo" alt="logo" />
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Links -->
+            <ul class="links">
+                <li>
+                    <a href="index.html">home</a>
+                </li>
+                <li>
+                    <a href="about.html">about</a>
+                </li>
+                <li>
+                    <a href="projects.html">projects</a>
+                </li>
+                <li>
+                    <a href="contact.html">contact</a>
+                </li>
+            </ul>
+
+            <!-- Social Media -->
+            <ul class="social-icons">
+                <li>
+                    <a href="https://www.twitter.com">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.twitter.com">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.twitter.com">
+                        <i class="fab fa-behance"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.twitter.com">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.twitter.com">
+                        <i class="fab fa-sketch"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Products Form -->
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <div>
+            <h3 style="text-align: center; margin-top: 16px;"> Add Product: </h3>
+        </div>
+        <!-- POST METHOD -->
+        <div style="display: flex; align-items: center; text-align: center;">
+            <form action="/api/products" method="POST" name="formProd">
+                Title:
+                <br>
+                <input type="text" name="title" class="input-field col s6">
+                <br>
+                Price:
+                <br>
+                <input type="number" name="price">
+                <br>
+                URL Thumbnail:
+                <br>
+                <input type="url" name="thumbnail">
+                <br>
+                <button type="submit" name="action"> SEND </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="./browser-app.js"></script>
+
+</body>
+
+</html>

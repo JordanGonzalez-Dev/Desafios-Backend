@@ -4,7 +4,6 @@ class Contenedor {
     constructor(name) {
         this.name = name;
     }
-    async getInfo() {}
 
     async save(info) {
         try {
@@ -88,8 +87,8 @@ let infoNueva = {
     price: 2000,
 };
 
-//contenedor.save(infoNueva).then((res) => console.log(res));
-// contenedor.getById(2).then((res) => console.log(res));
+// contenedor.save(infoNueva).then((res) => console.log(res));
+//contenedor.getById(2).then((res) => console.log(res));
 //contenedor.getAll().then((res) => console.log(res));
 //contenedor.deleteById(4).then((res) => console.log(res));
 //contenedor.deleteAll().then((res) => console.log(res));

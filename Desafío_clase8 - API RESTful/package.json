@@ -1,0 +1,23 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start-dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrakenJG/Backend-Coderhouse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KrakenJG/Backend-Coderhouse/issues"
+  },
+  "homepage": "https://github.com/KrakenJG/Backend-Coderhouse#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
