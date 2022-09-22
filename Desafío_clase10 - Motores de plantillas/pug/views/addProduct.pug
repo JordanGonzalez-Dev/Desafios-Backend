@@ -1,0 +1,29 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Pug
+        link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous")
+    body
+
+        main.d-flex.flex-column.p-4
+            h3.text-primary Agregar un producto
+
+            br
+
+            form(action='/productos' method='post')
+                div.form-group
+                    label.font-weight-bold(for='title') Nombre
+                    input.form-control(type='text' name='title')
+                div.form-group
+                    label.font-weight-bold(for='price') Precio
+                    input.form-control(type='number' name='price')
+                div.form-group
+                    label.font-weight-bold(for='thumbnail') URL - Imagen
+                    input.form-control(type='text' name='thumbnail')
+
+                input.btn.btn-success.mt-3.mb-5(type='submit' value='Enviar')
+                
+            a.btn.btn-primary(href='/productos') Ver productos

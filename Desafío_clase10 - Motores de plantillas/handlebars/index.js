@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 
 const Products = require('./models/Products');
 
@@ -20,7 +19,6 @@ app.set('view engine', 'hbs');
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(__dirname + "/public"));
 
 const products = new Products('data.json');
 

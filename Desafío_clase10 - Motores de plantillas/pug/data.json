@@ -3,24 +3,24 @@
         "id": 1,
         "title": "Gorra",
         "price": 500,
-        "thumbnail": ""
+        "thumbnail": "https://cdn2.iconfinder.com/data/icons/thesquid-ink-40-free-flat-icon-pack/64/cap-256.png"
     },
     {
         "id": 2,
         "title": "Remera",
         "price": 800,
-        "thumbnail": ""
+        "thumbnail": "https://cdn2.iconfinder.com/data/icons/line-color-mix-vol-4-1/128/line-24-256.png"
     },
     {
         "id": 3,
         "title": "Pantalon",
         "price": 1300,
-        "thumbnail": ""
+        "thumbnail": "https://cdn0.iconfinder.com/data/icons/men-travel-packing/512/pants-trouser-cloth-wear-256.png"
     },
     {
         "id": 4,
         "title": "Zapatilla",
         "price": 1800,
-        "thumbnail": ""
+        "thumbnail": "https://cdn4.iconfinder.com/data/icons/fashion-industry-set/88/Shoes-256.png"
     }
 ]
