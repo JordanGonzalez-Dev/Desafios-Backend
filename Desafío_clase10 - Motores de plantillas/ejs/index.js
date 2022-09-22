@@ -1,95 +1,65 @@
-const fs = require('fs/promises')
+const express = require('express');
 
-module.exports = class Products {
-	constructor(name) {
-		this.name = name;
+const Products = require('./models/Products');
+
+const app = express();
+const PORT = 8080 || process.env.PORT;
+
+// EJS Config
+app.set('view engine', 'ejs');
+
+// Middlewares
+app.use(express.json());
+app.use(express.urlencoded({
+	extended: false
+}));
+
+const products = new Products('data.json');
+
+// Routes
+app.get('/', async (req, res) => {
+	res.render('addProduct');
+
+})
+
+app.get('/productos', async (req, res) => {
+	const productsList = await products.getAll();
+	res.render('index', ({
+		productsList
+	}));
+})
+
+app.get('/productos/:id', async (req, res) => {
+	const {
+		id
+	} = req.params;
+	const product = await products.getById(id);
+	res.render('productDetail', ({
+		product
+	}));
+})
+
+app.post('/productos', async (req, res) => {
+	const {
+		title,
+		price,
+		thumbnail
+	} = req.body;
+	if (!title || !price || !thumbnail) {
+		req.send('Error: invalid body format');
 	}
+	const newProduct = {
+		title,
+		price,
+		thumbnail
+	};
+	await products.save(newProduct);
+	res.redirect('/');
+})
 
-	async getFile() {
-		try {
-			const content = await fs.readFile(`./${this.name}`, 'utf-8');
-			return JSON.parse(content);
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	async assignId() {
-		try {
-			const file = await this.getFile();
-			file.forEach((item) => {
-				if (!item.id) {
-					item.id = file.indexOf(item) + 1;
-				}
-			})
-			await fs.writeFile(`./${this.name}`, JSON.stringify(file, null, 2));
-			return file;
-		} catch (error) {
-			console.log(error)
-		}
-
-	}
-
-	async save(obj) {
-		try {
-			const file = await this.getFile();
-			const lastIndex = file.length - 1;
-			const lastId = file[lastIndex].id;
-			obj.id = lastId + 1;
-			file.push(obj);
-			await fs.writeFile(`./${this.name}`, JSON.stringify(file, null, 2));
-			return obj.id;
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	async getById(id) {
-		try {
-			const file = await this.getFile();
-			const array = file.filter((product) => product.id === +id);
-			if (array.length === 0) {
-				return false;
-			} else {
-				return array[0];
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	async getAll() {
-		try {
-			const file = await this.getFile();
-			return file;
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	async deleteById(id) {
-		try {
-			const file = await this.getFile();
-			const filteredArray = file.filter((product) => product.id !== +id)
-			if (filteredArray.length === file.length) {
-				return {
-					error: 'producto no encontrado'
-				};
-			} else {
-				await fs.writeFile(`./${this.name}`, JSON.stringify(filteredArray, null, 2));
-				return;
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	async deleteAll() {
-		try {
-			const empty = [];
-			await fs.writeFile(`./${this.name}`, JSON.stringify(empty))
-		} catch (error) {
-			console.log(error);
-		}
-	}
-}
+const connectedServer = app.listen(PORT, () => {
+	console.log(`Server is up and running on port ${PORT}`);
+})
+connectedServer.on('error', (error) => {
+	console.log(error);
+})

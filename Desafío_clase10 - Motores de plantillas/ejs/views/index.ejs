@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+
+<body class="text-center">
+    <div class="d-flex flex-column p-4">
+        <h1>Lista Completa</h1>
+
+        <a href="/" class="btn btn-primary my-4">Agregar producto</a>
+    </div>
+
+    <h3 class="text-primary mt-4">Productos</h3>
+
+    <br>
+
+    <div class="table-responsive">
+
+        <table class="table align-middle table-dark">
+
+            <tr class="text-warning">
+                <th class="font-weight-bold">ID</th>
+                <th class="font-weight-bold">Nombre</th>
+                <th class="font-weight-bold">Precio</th>
+                <th class="font-weight-bold">Imagen</th>
+            </tr>
+
+            <% productsList.forEach((product)=>{ %>
+            <tr>
+                <td>
+                    <%= product.id %>
+                </td>
+                <td>
+                    <a href="/productos/<%= product.id %> ">
+						<%= product.title %>
+                    </a>
+                </td>
+                <td>
+                    <%= product.price %>
+                </td>
+                <td>
+                    <div>
+                        <img style="height: 25px;" src=<%= product.thumbnail %>  alt=<%= product.title %>>
+                    </div>
+                </td>
+            </tr>
+            <% }) %>
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>
