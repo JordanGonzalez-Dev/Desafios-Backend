@@ -13,33 +13,36 @@
 
 <body>
 
-    <div id="chat"></div>
+    <section class="d-flex flex-column p-4 text-center">
+        <h1 class="text-primary">Ingrese Producto</h1>
+        
+        <form action="/" method="post" id="form">
+            
+            <label for="titulo">Nombre</label>
+            <br>
+            <input type="text" id="titulo" name="title" placeholder="Ingrese nombre del producto" />
+            <br>
+            <label for="precio">Precio</label>
+            <br>
+            <input type="number" id="precio" name="price" placeholder="Ingrese precio del producto" />
+            <br>
+            <label for="imagen">Foto URL</label>
+            <br>
+            <input type="text" id="imagen" name="thumbnail" placeholder="Ingrese URL del producto" />
+            <br>
+            <button type="submit">Enviar</button>
+            <br>
+            <button type="reset">Reset</button>
 
-    {{#if mostrarProductos}}
-    <div class="d-flex flex-column p-4 text-center">
-        <h1>Lista Completa</h1>
+        </form>
+    </section>
 
-        <a href="/" class="btn btn-primary my-4">Agregar producto</a>
+    {{> partial}}
+    {{> chat}}
 
-        <div>
-            {{> products}}
-        </div>
-    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./main.js"></script>
 
-    {{/if}}
-
-    {{#if mostrarForm}}
-    <div>
-        {{> form}}
-    </div>
-    {{/if}}
-
-    {{#if mostrarDetalle}}
-    {{> itemDetail}}
-    {{/if}}
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="./main.js"></script>
 </body>
 
 </html>

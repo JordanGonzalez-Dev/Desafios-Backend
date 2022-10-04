@@ -1,8 +1,7 @@
 const express = require("express");
 const path = require("path");
 const { formatMessage } = require("./utils/utils");
-// Data
-const Products = require("./models/Products");
+const Products = require("./models/data");
 // Servidor con Socket
 const { Server: HttpServer } = require("http");
 const { Server: SocketServer } = require("socket.io");
@@ -36,36 +35,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("./public"));
 
-const products = new Products("data.json");
+const products = new Products();
+const { items } = products;
 
 // Routes
-app.get("/chat", (req, res) => {
-	console.log(users);
-	res.sendFile(__dirname + '/public/chat.html');
+app.get("/api/productos", (req, res) => {
+	res.json(items);
 });
 
-app.get("/", async (req, res) => {
-	res.render("index", { mostrarForm: true });
-});
-
-app.get("/productos", async (req, res) => {
-	res.render("index", {
-		mostrarProductos: true,
-		products: await products.getAll(),
-	});
-});
-
-app.get("/productos/:id", async (req, res) => {
-	const { id } = req.params;
-	const product = await products.getById(id);
-	res.render("index", { mostrarDetalle: true, product });
+app.get("/", (req, res) => {
+	res.render("index");
 });
 
 app.get("*", (req, res) => {
 	res.status(404).send(`<h1>Path not found</h1>`);
 });
 
-app.post("/productos", async (req, res) => {
+app.post("/", async (req, res) => {
 	const { title, price, thumbnail } = req.body;
 	if (!title || !price || !thumbnail) {
 		req.send("Error: invalid body format");
@@ -79,24 +65,19 @@ app.post("/productos", async (req, res) => {
 	res.redirect("/");
 });
 
-app.post('/login', (req, res) => {
-	const { username } = req.body;
-	if (users.find(user => user.username === username)) {
-		return res.send("Username already taken");
-	}
-	res.redirect(`/chat?username=${username}`)
-});
-
 // Socket Events
 io.on("connection", (socket) => {
-	console.log("New client connection!");
+	console.log("New client connection! 🟩");
 	console.log(socket.id);
 
+	// Getting all items
+	io.emit("items", [...items]);
+
 	// Getting all messages
-	socket.emit('messages', [...messages]);
+	io.emit('messages', [...messages]);
 
 	// Welcome to chat
-	socket.on("join-chat", (email) => {
+	socket.on("new-user", (email) => {
 		const newUser = {
 			id: socket.id,
 			email: email
@@ -111,21 +92,13 @@ io.on("connection", (socket) => {
 		messages.push(newMessage);
 		products.saveMessage(user.email, msg, newMessage.time);
 
-		// Creamos un documento txt donde almacenamos todos los mensajes enviados.
-		fs.appendFile("conversacion.txt", JSON.stringify(data), (err) => {
-			if (err) {
-				throw err;
-			}
-			console.log(`Archive create sucessfull`);
-		});
-
 		io.emit("chat-message", newMessage);
 	});
 
-	const id = socket.id;
 	socket.on("disconnect", () => {
-		io.emit("disc", `${id}`);
-		console.log(`disconect ${id}`);
+		io.emit("disc", socket.id);
+		console.log("Client disconnected 🟥");
+		console.log(socket.id);
 	});
 });
 
