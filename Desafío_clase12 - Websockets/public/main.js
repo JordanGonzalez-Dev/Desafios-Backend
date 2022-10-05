@@ -5,12 +5,11 @@ const div = document.getElementById("divProduct");
 
 // Renderizado de productos
 socket.on("items", (data) => {
-    //console.log(data);
     const table = `
     <tr>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Imagen</th>
+        <td><strong>Nombre</strong></td>
+        <td><strong>Precio</strong></td>
+        <td><strong>Imagen</strong></td>
     </tr>`;
 
     const html = data

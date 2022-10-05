@@ -82,8 +82,8 @@ io.on("connection", (socket) => {
 			id: socket.id,
 			email: email
 		};
+		
 		users.push(newUser);
-		// Bot Greetings
 	})
 
 	socket.on("new-message", async (msg) => {
