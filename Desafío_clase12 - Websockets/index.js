@@ -74,7 +74,7 @@ io.on("connection", (socket) => {
 	io.emit("items", [...items]);
 
 	// Getting all messages
-	io.emit('messages', [...messages]);
+	io.emit('message', [...messages]);
 
 	// Welcome to chat
 	socket.on("new-user", (email) => {
