@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handlebars</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <section class="d-flex flex-column p-4 m-4 text-center bg-light">
+        <h1 class="text-primary">Ingrese Producto</h1>
+        
+        <form action="/" method="post" id="form">
+            
+            <label for="titulo">Nombre</label>
+            <br>
+            <input type="text" id="titulo" name="title" placeholder="Ingrese nombre del producto" />
+            <br>
+            <label for="precio">Precio</label>
+            <br>
+            <input type="number" id="precio" name="price" placeholder="Ingrese precio del producto" />
+            <br>
+            <label for="imagen">Foto URL</label>
+            <br>
+            <input type="text" id="imagen" name="thumbnail" placeholder="Ingrese URL del producto" />
+            <br>
+            <button type="submit">Enviar</button>
+            <br>
+            <button type="reset">Reset</button>
+
+        </form>
+        
+    </section>
+
+    {{> partial}}
+    {{> chat}}
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./main.js"></script>
+
+</body>
+
+</html>
