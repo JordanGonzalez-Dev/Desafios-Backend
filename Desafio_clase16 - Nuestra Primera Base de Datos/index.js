@@ -8,7 +8,7 @@ const SQLDBclient = require("./db/client/clientDB");
 const dbConfig2 = require("./db/configDB");
 
 const db = new SQLClient(dbConfig, "mensajes");
-const db2 = new SQLDBclient(dbConfig, "productos");
+const db2 = new SQLDBclient(dbConfig2, "productos");
 // Servidor con Socket
 const { Server: HttpServer } = require("http");
 const { Server: SocketServer } = require("socket.io");
